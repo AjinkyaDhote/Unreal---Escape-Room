@@ -1,0 +1,9 @@
+*/Build
+*/Binaries
+*/DerivedDataCache
+Content/StarterContent/
+Intermediate/
+Saved/
+
+*.VC.opendb
+*.sdf
