@@ -2,7 +2,7 @@
 
 #include "OpenDoor.h"
 #include "GameFramework/Actor.h"
-
+#include "Engine/TriggerVolume.h"
 
 // Sets default values for this component's properties
 UOpenDoor::UOpenDoor()
@@ -19,7 +19,11 @@ UOpenDoor::UOpenDoor()
 void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
+	
+}
 
+void UOpenDoor::OpenDoor()
+{
 	//Find the owning Actor
 	AActor* Owner = GetOwner();
 
@@ -36,6 +40,12 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+	//Poll the trigger Volume
+	//every frame if the ActorThatOpens is in the Volume 
+	if (PressurePlate->IsOverlappingActor(ActorThatOpens))
+	{		
+		OpenDoor();
+	}
+	
 }
 
