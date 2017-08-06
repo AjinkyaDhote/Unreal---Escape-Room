@@ -40,12 +40,36 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	FRotator PlayerViewRotation;
 	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(OUT PlayerViewLocation, OUT PlayerViewRotation);
 
-	////Log
+	///Log
 	//UE_LOG(LogTemp, Warning, TEXT("Position is %s"), *PlayerViewLocation.ToString());
 	//UE_LOG(LogTemp, Warning, TEXT("Rotation is %s"), *PlayerViewRotation.ToString());
 
+	///How long should be the ray drawn
 	FVector LineReachEnd = PlayerViewLocation + PlayerViewRotation.Vector() * Reach;
 
+	///Draw Debug Ray
 	DrawDebugLine(GetWorld(), PlayerViewLocation, LineReachEnd, FColor(255, 0, 0), false, 0.0f, 0.0f, 10.0f);
+
+
+	///Setup Query Parameters
+	FCollisionQueryParams TraceParameters(FName(TEXT("")), false, GetOwner());
+
+	///Ray Casting
+	FHitResult Hit;
+	GetWorld()->LineTraceSingleByObjectType(
+		OUT Hit,
+		PlayerViewLocation,
+		LineReachEnd,
+		FCollisionObjectQueryParams(ECollisionChannel::ECC_PhysicsBody),
+		TraceParameters
+		);
+
+	
+	AActor* ObjectHit = Hit.GetActor();
+
+	if (ObjectHit)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Object Hit is %s"), *(ObjectHit->GetName()));
+	}	 
 }
 
