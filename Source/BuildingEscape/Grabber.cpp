@@ -102,7 +102,7 @@ const FHitResult UGrabber::GetFirstPhysicsBodyInReach()
 
 	if (ObjectHit)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Object Hit is %s"), *(ObjectHit->GetName()));
+		//UE_LOG(LogTemp, Warning, TEXT("Object Hit is %s"), *(ObjectHit->GetName()));
 	}
 	return Hit;
 }
