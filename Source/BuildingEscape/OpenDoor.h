@@ -35,17 +35,12 @@ public:
 	FDoorEvent OnCloseRequest;
 
 private:
-
-	//UPROPERTY(VisibleAnywhere)
-	//float OpenAngle = 90.0f;
-	
+		
 	UPROPERTY(EditAnywhere)
 	ATriggerVolume* PressurePlate = nullptr;
 	
 	UPROPERTY(EditAnywhere)
 	float TriggerMass = 50.0f;
-
-	//float LastDoorOpenTime;
 	
 	AActor * Owner;
 
